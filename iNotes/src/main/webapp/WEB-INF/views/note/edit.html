@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chỉnh sửa ghi chú</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/create.css">
+    <style>
+        div{
+            align: center;
+        }
+
+        .khung{
+            border-style: solid;
+            padding: 100px;
+            margin: 100px 350px 100px 350px;
+            background-color: rgb(181, 228, 243);
+            border-radius: 6px;
+        }
+
+        table{
+            border: 3px solid black;
+            width: 100% ;
+        }
+
+        .cot{
+            background-color:rgb(231, 201, 154);
+        }
+
+        #area{
+            background-color:rgb(231, 201, 154);
+        }
+        #description{
+            background-color:rgb(231, 201, 154);
+        }
+        #GDP{
+            background-color:rgb(231, 201, 154);
+        }
+        #population{
+            background-color:rgb(231, 201, 154);
+        }
+        #country{
+            background-color:rgb(231, 201, 154);
+        }
+        #name{
+            background-color:rgb(231, 201, 154);
+        }
+
+        .suatp{
+            padding-left: 400px;
+        }
+    </style>
+</head>
+<body>
+<div align="center" class="khung">
+    <div>
+        <h2>Chỉnh sửa ghi chú</h2>
+    </div>
+    <div>
+        <form method="post" th:action="@{/edit-note}" th:object="${note}" >
+            <input th:type="hidden" name="id" th:field="*{id}">
+            <table border="1" cellpadding="5" class="cot">
+                <tr>
+                    <td>Tiêu đề:</td>
+                    <td><input type="text" th:field="*{title}" size="65" required/></td>
+                </tr>
+                <tr>
+                    <td>Nội dung:</td>
+                    <td><textarea th:field="*{content}" rows="7" cols="65" required/></td>
+                </tr>
+                <tr>
+                    <td>Thể loại:</td>
+                    <td>
+                        <select name="noteType">
+                            <option th:each="n : ${noteTypes}"
+                                    th:value="${n.id}"
+                                    th:text="${n.name}"
+                                    th:selected="(${note.noteType}) and (${n.id} == *{noteType.id})"></option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td colspan="2" align="center">
+                        <input class="btn btn-warning" type="submit" value="Cập nhật">
+                        <a class="btn btn-warning" href="/notes">Thoát</a>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+</body>
+</html>
